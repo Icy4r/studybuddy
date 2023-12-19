@@ -7,7 +7,7 @@ from useraccounts.forms import loginForm
 from django.http import HttpResponseRedirect
 
 
-# Create your views here.
+# Create your views here. testy testy testy
 def login_view(request):
 
     if request.method == "POST":
