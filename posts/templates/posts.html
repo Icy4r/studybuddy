@@ -1,0 +1,36 @@
+{% extends 'homepage.html' %}
+
+
+
+
+{% block content %}
+<!-- <div class="container mt-4"> -->
+
+    <!-- Add an Entry -->
+    <a href="/posts/add/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add an Entry</a><br>
+
+    <br>
+
+    <!-- Display Cards -->
+    {% block posts %}
+    <div class="row">
+        {% for p in posts %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><a href='/posts/{{ p.id }}'><b>{{ p.title }}</b></a> (<i>{{ p.location }}</i>)</h5>
+                    <p class="card-text"><small>{{ p.date }}</small></p>
+                    <p class="card-text">{{ p.message }}</p>
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 and not forloop.last %}
+    </div>
+    <div class="row">
+        {% endif %}
+        {% endfor %}
+    
+    {% endblock posts%}
+    </div>
+<!-- </div> -->
+{% endblock content %}
