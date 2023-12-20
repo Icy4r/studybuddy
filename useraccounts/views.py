@@ -2,12 +2,14 @@ from django.shortcuts import render, HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from userprofile.models import UserProfile
 from useraccounts.forms import loginForm
 from django.http import HttpResponseRedirect
 
 
-# Create your views here. testy testy testy
+# Create your views here.
 def login_view(request):
 
     if request.method == "POST":
@@ -45,6 +47,12 @@ def create_account(request):
     
         if form.is_valid():
             form.save()
+
+            # create UserProfile
+            u = User.objects.get(username=form.cleaned_data['username'])
+            userProfile = UserProfile(user=u, name=u.username)
+            userProfile.save()
+            
             return HttpResponseRedirect('/useraccounts/login/') 
 
     else:
